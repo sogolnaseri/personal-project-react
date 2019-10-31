@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+.App {
+  font-family: sans-serif;
+}
+
+input {
+  padding: 10px;
+  width: 200px;
+  margin-bottom: 12px;
+}
+label {
+  display: block;
+}
+
+button {
+  width: 200px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  background: green;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 2px;
+}
