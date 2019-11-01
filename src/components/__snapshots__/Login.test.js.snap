@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login should render properly 1`] = `
+<div
+  className="login"
+>
+  <h2>
+    Github UserName :
+  </h2>
+  <_default
+    id="github-username"
+    name="username"
+  />
+  <div
+    className="Get User button"
+  >
+    <_default
+      value="GET USER"
+    />
+  </div>
+</div>
+`;
