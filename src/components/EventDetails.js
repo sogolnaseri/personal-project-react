@@ -1,7 +1,6 @@
 import React from "react";
 
 export default ({ eventName, eventdetails, eventUrl }) => {
-  console.log(eventUrl);
   return (
     <ol
       style={{
