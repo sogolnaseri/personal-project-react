@@ -8,6 +8,7 @@ export default ({ eventName, eventdetails, eventUrl }) => {
         border: "1px solid black",
         marginLeft: "10%",
         borderRadius: "6px",
+        marginBottom: "10px",
         width: "70%"
       }}
       key={eventName}
