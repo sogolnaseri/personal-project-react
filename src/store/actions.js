@@ -4,13 +4,10 @@ export const ACTION_TYPES = {
   CHANGE_USERNAME: "change user name"
 };
 
-export const handleChangeUsername = event => {
-  console.log(event);
-  return {
-    type: ACTION_TYPES.CHANGE_USERNAME,
-    payload: event.target.value
-  };
-};
+export const handleChangeUsername = event => ({
+  type: ACTION_TYPES.CHANGE_USERNAME,
+  payload: event.target.value
+});
 
 const handleLogin = profile => ({
   type: ACTION_TYPES.SET_LOGIN,
