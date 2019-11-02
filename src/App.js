@@ -3,65 +3,49 @@ import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/Login.js";
 import Events from "./components/Events.js";
+import { connect } from "react-redux";
+import { handleChangeUsername, login, getEventsData } from "./store/actions";
 
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loggedIn: false,
-      username: "",
-      profile: {},
-      events: []
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-  handleLogin() {
-    this.getGithubUser(this.state.username)
-      .then(res => res.json())
-      .then(data => this.setState({ profile: data, loggedIn: true }))
-      .catch(err => this.setState({ error: err }));
-  }
-
-  getGithubUser(username) {
-    return fetch(`https://api.github.com/users/${username}`);
-  }
-
-  getGithubEvents(username) {
-    fetch(`https://api.github.com/users/${username}/events`)
-      .then(res => res.json())
-      .then(data => this.setState({ events: data }))
-      .catch(err => this.setState({ error: err }));
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.loggedIn !== this.state.loggedIn) {
-      if (this.state.loggedIn) {
-        this.getGithubEvents(this.state.username);
+export class App extends Component {
+  componentDidUpdate(prevProps) {
+    if (prevProps.loggedIn !== this.props.loggedIn) {
+      if (this.props.loggedIn) {
+        this.props.getEventsData(this.props.username);
       }
     }
   }
 
   render() {
-    console.log(this.state.events);
     return (
       <div className="App">
-        {this.state.profile.name && this.state.username ? (
-          <Events events={this.state.events} userName={this.state.username} />
+        {this.props.loggedIn ? (
+          <Events events={this.props.events} userName={this.props.username} />
         ) : (
           <Login
-            handleChange={this.handleChange}
-            handleLogin={this.handleLogin}
-            username={this.state.username}
+            handleChange={this.props.handleChangeUsername}
+            handleLogin={() => this.props.login(this.props.username)}
+            username={this.props.username}
           />
         )}
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn,
+  username: state.username,
+  profile: state.profile,
+  events: state.events
+});
+
+const mapDispatchToProps = {
+  handleChangeUsername,
+  login,
+  getEventsData
+};
+
+export const AppContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
