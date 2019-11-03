@@ -1,7 +1,10 @@
 import React from "react";
 import EventDetails from "./EventDetails";
-
+/**
+ * this function calls the EventDeatils Component with fork or pull data
+ */
 export default ({ events, title, type }) => {
+  //The below function filters the events ased on their type
   const getEventList = () => {
     const filteredEvents = () => {
       if (type === "fork") {
@@ -11,14 +14,14 @@ export default ({ events, title, type }) => {
       }
     };
     if (type === "fork") {
-      return filteredEvents().map(({ repo, payload: { forkee } }, i) => (
+      return filteredEvents().map(({ repo, payload: { forkee } }) => (
         <EventDetails
           eventName={forkee.full_name}
           eventdetails={`Forked From : ${repo.name}`}
         />
       ));
     } else if (type === "pull") {
-      return filteredEvents().map(({ payload: { pull_request } }, i) => (
+      return filteredEvents().map(({ payload: { pull_request } }) => (
         <EventDetails
           eventName={pull_request.title}
           eventdetails={`Status: ${pull_request.state}`}

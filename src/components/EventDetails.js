@@ -1,5 +1,8 @@
 import React from "react";
-
+/**
+ * this function returns the data for each border
+ *
+ */
 export default ({ eventName, eventdetails, eventUrl }) => {
   return (
     <ol
