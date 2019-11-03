@@ -3,7 +3,6 @@ import TextField from "./TextField.js";
 import Button from "./Button.js";
 
 export default ({ handleChange, handleLogin, username }) => {
-  console.log(username);
   return (
     <div className="login">
       <h2>Github UserName :</h2>
